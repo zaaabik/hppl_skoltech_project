@@ -1,0 +1,26 @@
+target_mcc_transaction_sampler:
+  _target_: src.dataset_generate.src.transaction.TransactionSampler
+  amount_distribution:
+    _target_: torch.distributions.normal.Normal
+    loc: 1
+    scale: 1
+  mcc: 0
+
+first_mcc_transaction_sampler:
+  _target_: src.dataset_generate.src.transaction.TransactionSampler
+  amount_distribution:
+    _target_: torch.distributions.normal.Normal
+    loc: 1
+    scale: 1
+  mcc: 1
+
+app_sampler:
+  _target_: src.dataset_generate.src.transaction.AppCounterTransactionSampler
+  transaction_sampler_counter:
+    - - ${transaction_sampler.target_mcc_transaction_sampler}
+      - _target_: src.dataset_generate.src.transaction.UniformTransactionCountDistribution
+        lower: 2
+        upper: 8
+    - - ${transaction_sampler.first_mcc_transaction_sampler}
+      - _target_: src.dataset_generate.src.transaction.RestTransactionFiller
+  max_length: ${num_transactions_in_application}

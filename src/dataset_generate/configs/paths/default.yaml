@@ -1,0 +1,27 @@
+# path to root directory
+# this requires PROJECT_ROOT environment variable to exist
+# you can replace it with "." if you want the root to be the current working directory
+root_dir: ${oc.env:PROJECT_ROOT}
+
+# path to data directory
+synth_data_dir: ${oc.env:DATA_PATH}/synth_data
+
+
+log_dir: ${oc.env:LOG_DIR}/generate_synth_data/logs
+
+
+# path to output directory, created dynamically by hydra
+# path generation pattern is specified in `configs/hydra/default.yaml`
+# use it to store all files generated during the run, like ckpts and metrics
+# output_dir: ${hydra:runtime.output_dir}
+
+# path to working directory
+# work_dir: ${hydra:runtime.cwd}
+
+# transaction_path: ${paths.data_dir}/serialized
+# preprocessing_data_path : ${paths.data_dir}/preprocessing
+# log_dir: ${oc.env:LOG_DIR}/logs
+# target_path: ${paths.data_dir}/targets
+# idx_path: ${paths.data_dir}/2022_indexes
+
+# debug_samples_path: ${oc.env:DEBUG_DIR}/debug_samples.pkl

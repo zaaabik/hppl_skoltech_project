@@ -1,0 +1,76 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - override /transaction_sampler: /with_filler/uniform_range_mcc_count
+  - override /target_generator: zero_mcc_amount_mean_regression
+
+root_dir: ${oc.env:PROJECT_ROOT}
+
+num_transactions_in_application: 4096
+num_applications: 2000
+
+# should be overridden in experiment
+target_transaction_count:
+  lower: ???
+  upper: ???
+
+transaction_count_in_a_day:
+  min: 1
+  max: 5
+
+task_type: regression
+num_output: 1
+
+train_part: 0.5
+callback_part: 0.13
+val_part: 0.12
+test_part: 0.25
+
+experiment_loc: 1
+experiment_scale: 1
+
+loc_target: ${experiment_loc}
+scale_target: ${experiment_scale}
+
+loc_first: ${experiment_loc}
+scale_first: ${experiment_scale}
+
+transaction_sampler:
+  first_mcc_transaction_sampler:
+    amount_distribution:
+      loc: ${loc_first}
+      scale: ${scale_first}
+
+  target_mcc_transaction_sampler:
+    amount_distribution:
+      loc: ${loc_target}
+      scale: ${scale_target}
+
+  app_sampler:
+    time_sampler:
+      _target_: src.dataset_generate.src.transaction.MultipleTransactionPerDayTimeFeatureGenerator
+      min_transaction_in_a_day: ${transaction_count_in_a_day.min}
+      max_transaction_in_a_day: ${transaction_count_in_a_day.max}
+    transaction_sampler_counter:
+      - - ${transaction_sampler.target_mcc_transaction_sampler}
+        - _target_: src.dataset_generate.src.transaction.UniformTransactionCountDistribution
+          lower: ${target_transaction_count.lower}
+          upper: ${target_transaction_count.upper}
+      - - ${transaction_sampler.first_mcc_transaction_sampler}
+        - _target_: src.dataset_generate.src.transaction.RestTransactionFiller
+
+agg_function_name: ${split_and_get_by_index:${target_generator.amount_reducer._target_},'.',-1}
+
+save_path: "${paths.synth_data_dir}/regression/with_filler/\
+  different_target_count/${agg_function_name}/time_feature_\
+  min_trans_per_day=${transaction_sampler.app_sampler.time_sampler.min_transaction_in_a_day}\
+  _max_trans_per_day=${transaction_sampler.app_sampler.time_sampler.max_transaction_in_a_day}/\
+  num_applications=${num_applications}\
+  _num_transactions=${num_transactions_in_application}\
+  _num_target_transactions_lower=${target_transaction_count.lower}\
+  _num_target_transactions_upper=${target_transaction_count.upper}\
+  _loc_target=${loc_target}\
+  _scale_target=${scale_target}\
+  _loc_first=${loc_first}\
+  _scale_first=${scale_first}"

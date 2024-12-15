@@ -1,0 +1,18 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - target_generator: seq2seq/zero_mcc_amount_mean_regression_sliding
+  - experiment: null
+  - hparams_search: null
+  - paths: default
+
+task_type: regression
+
+seed: 42
+
+dataset_folder: ${paths.synth_data_dir}/regression/with_filler/different_target_count/mean/num_applications=20000_num_transactions=300_num_target_transactions_lower=90_num_target_transactions_upper=110_loc_target=1_scale_target=1_loc_first=1_scale_first=1/
+target_name: ${target_generator.reduce}_sliding_window_size_${target_generator.window_size}
+
+hydra:
+  output_subdir: null

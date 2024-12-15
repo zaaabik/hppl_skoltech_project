@@ -1,0 +1,5 @@
+_target_: src.dataset_generate.src.target.MCCAmountRegressionTarget
+target_mcc: 0
+amount_reducer:
+  _target_: numpy.mean
+  _partial_: true

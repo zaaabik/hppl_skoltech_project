@@ -1,0 +1,17 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - override /target_generator: zero_mcc_agg_transaction_in_same_day
+
+task_type: regression
+
+seed: 42
+
+dataset_folder: ${paths.synth_data_dir}/regression/with_filler/different_target_count/mean/num_applications=20000_num_transactions=300_num_target_transactions_lower=90_num_target_transactions_upper=110_loc_target=1_scale_target=1_loc_first=1_scale_first=1/
+agg_function_name: ${split_and_get_by_index:${target_generator.reduce._target_},'.',-1}
+
+target_name: group_by_time_${agg_function_name}_days_lag_${target_generator.days_lag}
+
+hydra:
+  output_subdir: null

@@ -1,0 +1,22 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - transaction_sampler: null
+  - target_generator: null
+  - experiment: fixed_mcc_count_predict_amount_mean_normal_target_gte_thr
+  - hparams_search: null
+  - paths: default
+  - hydra: default
+  - override hydra/hydra_logging: disabled
+  - override hydra/job_logging: disabled
+
+name: test
+
+num_output: 1
+
+num_transactions_in_application: 1
+num_applications: 10
+
+hydra:
+  output_subdir: null

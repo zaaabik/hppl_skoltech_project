@@ -8,9 +8,9 @@
 
 ### Overview:
 
-This project focuses on improving the speed of synthetic transaction target generation by leveraging Numba and multiprocessing. The optimized implementation achieves a remarkable 18x speedup, increasing performance from 25 users per second to 444 users per second for single-target generation.
+This project focuses on improving the speed of synthetic transaction target generation by leveraging Numba and multiprocessing. The optimized implementation achieves a remarkable 18x speedup, increasing performance from 20 users per second to 444 users per second for single-target generation.
 
-Furthermore, the framework now supports **generating 20 synthetic targets per transaction with a performance of 45 users per second**. 
+Furthermore, the framework now supports **generating 20 synthetic targets per transaction with a performance of 50 users per second**. 
 
 <img src="out/single_target_speedup.png" alt="">
 
@@ -31,9 +31,9 @@ Furthermore, the framework now supports **generating 20 synthetic targets per tr
 
 | JIT | Num Process | Num Users | Transactions per User | Num Targets per Transaction | Time (s) | Speedup | User per Sec |
 |-----|-------------|-----------|-----------------------|-----------------------------|----------|---------|--------------|
-| +   | 0           | 2000      | 4096                  | 20                          | 212      | 1       | 9            |
-| +   | 4           | 2000      | 4096                  | 20                          | 67       | 3       | 30           |
-| +   | 8           | 2000      | 4096                  | 20                          | 45       | 5       | 44           |
+| +   | 0           | 2000      | 4096                  | 20                          | 170      | 1       | 12           |
+| +   | 4           | 2000      | 4096                  | 20                          | 49       | 3       | 41           |
+| +   | 8           | 2000      | 4096                  | 20                          | 41       | 4       | 49           |
 
 
 
@@ -77,7 +77,7 @@ bash scripts/data_generate/seq2seq_target_generate.sh
 
 **Run single-target profiler**
 ```
-python tests/test_dataset_multi_target_20_target.py
+python tests/test_dataset_single_target_profiler.py
 ```
 
 **Run multi-target profiler**

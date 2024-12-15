@@ -23,7 +23,7 @@ num_application = 2000
 
 
 def test_pytorch_dataloader_multiple_targets(num_workers):
-    num_targets = 20
+    num_targets = 20 - 3
 
     data = generate_synthetic_data(
         length=length, min_diff_day=1, max_diff_day=1, number_mcc=1
@@ -159,7 +159,7 @@ def test_pytorch_dataloader_multiple_targets(num_workers):
     next(iter(dataloader))
 
     cProfile.runctx("[batch for batch in tqdm(dataloader)]", globals(), locals(),
-                    filename=f'profiler_results/jit_pytorch_{num_targets}_targets_load_process_{num_workers}.pstats')
+                    filename=f'profiler_results/jit_pytorch_{num_targets + 3}_targets_load_process_{num_workers}.pstats')
 
 
 if __name__ == '__main__':

@@ -19,22 +19,21 @@ Furthermore, the framework now supports **generating 20 synthetic targets per tr
 
 ## Performance Metrics for single target per transaction generation
 
-| JIT | Num Process | Num Users | Num Targets per Transaction | Time (s) | Speedup | User per Sec |
-|-----|-------------|-----------|-----------------------------|----------|---------|--------------|
-| -   | 0           | 2000      | 1                           | 80       | 1       | 25           |
-| +   | 0           | 2000      | 1                           | 15       | 5       | 133          |
-| +   | 4           | 2000      | 1                           | 4.5      | 18      | 444          |
-| +   | 8           | 2000      | 1                           | 4.5      | 18      | 444          |
-
+| JIT | Num Process | Num Users | Transactions per User | Num Targets per Transaction | Time (s) | Speedup | User per Sec |
+|-----|-------------|-----------|-----------------------|-----------------------------|----------|---------|--------------|
+| -   | 0           | 2000      | 4096                  | 1                           | 80       | 1       | 25           |
+| +   | 0           | 2000      | 4096                  | 1                           | 15       | 5       | 133          |
+| +   | 4           | 2000      | 4096                  | 1                           | 4.5      | 18      | 444          |
+| +   | 8           | 2000      | 4096                  | 1                           | 4.5      | 18      | 444          |
 
 
 # Performance Metrics for 20 targets per transaction generation
 
-| JIT | Num Process | Num Users | Num Targets per Transaction | Time (s) | Speedup | User per Sec |
-|-----|-------------|-----------|-----------------------------|----------|---------|--------------|
-| +   | 0           | 2000      | 20                          | 212      | 1       | 9            |
-| +   | 4           | 2000      | 20                          | 67       | 3       | 30           |
-| +   | 8           | 2000      | 20                          | 45       | 5       | 44           |
+| JIT | Num Process | Num Users | Transactions per User | Num Targets per Transaction | Time (s) | Speedup | User per Sec |
+|-----|-------------|-----------|-----------------------|-----------------------------|----------|---------|--------------|
+| +   | 0           | 2000      | 4096                  | 20                          | 212      | 1       | 9            |
+| +   | 4           | 2000      | 4096                  | 20                          | 67       | 3       | 30           |
+| +   | 8           | 2000      | 4096                  | 20                          | 45       | 5       | 44           |
 
 
 

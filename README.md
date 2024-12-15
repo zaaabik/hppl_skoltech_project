@@ -14,7 +14,7 @@ Furthermore, the framework now supports **generating 20 synthetic targets per tr
 
 <img src="out/single_target_speedup.png" alt="">
 
-<img src="out/20_target_per_transaction_speedup.png" alt="">
+<img src="out/20_targets_per_transaction_speedup.png" alt="">
 
 
 ## Performance Metrics for single target per transaction generation
@@ -57,7 +57,6 @@ Full profiler example:
 **Numba JIT:**
 
 <img src="out/numba_implementation_profiler.png" alt="">
-
 
 
 

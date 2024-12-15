@@ -1,8 +1,22 @@
 # Skoltech High Performance Python Lab 2024
-## Student: Zabolotnyi Artem
+## Project: Efficient Synthetic Target Generation for Transaction Data
+#### Student: Zabolotnyi Artem
 
-```Run base implementation
+[Presentation](presentation/presentation.pdf)
+
+[Profiler output](profiler_results)
+
+
+```bash
+conda env create --name hppl_project -f environment.yml
+conda activate hppl_project
+```
+
+```Generate base data
 bash scripts/data_generate/data_generate.sh
+```
+
+```Time measure and profile base method
 bash scripts/data_generate/seq2seq_target_generate.sh
 ```
 
@@ -32,12 +46,10 @@ python tests/test_dataset_multi_target_20_target_mp.py
 ```
 
 ```Run profiler vizualization
-snakeviz jit_pytorch_multi_target_load.pstats
+snakeviz base_target_generation.pstats
 
 snakeviz jit_pytorch_multi_target_load.pstats
 
 snakeviz jit_pytorch_singe_target_load.pstats
-
-
 ```
 

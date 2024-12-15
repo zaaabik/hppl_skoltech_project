@@ -22,7 +22,7 @@ length = 4096
 num_application = 2000
 
 
-def test_pytorch_dataloader_single_target():
+def test_pytorch_dataloader_single_target(num_workers):
     data = generate_synthetic_data(
         length=length, min_diff_day=1, max_diff_day=1, number_mcc=1
     )
@@ -106,18 +106,18 @@ def test_pytorch_dataloader_single_target():
 
     indexes = np.random.permutation(indexes)
     dataset.indexes = indexes
-    num_workers = 0
     print('Num workers', num_workers)
     dataloader = DataLoader(dataset, num_workers=num_workers,
                             batch_size=64, collate_fn=SequenceTargetCollatorMultiTarget(seq_len=length),
-                            persistent_workers=False)
+                            persistent_workers=num_workers > 0)
     print('Init dataloader')
     next(iter(dataloader))
 
-    for batch in tqdm(dataloader):
-        pass
-    # cProfile.runctx("list(dataloader)", None, locals(), filename='jit_pytorch_singe_target_load.pstats')
+    cProfile.runctx("[batch for batch in tqdm(dataloader)]", globals(), locals(),
+                    filename=f'profiler_results/jit_pytorch_singe_target_load_process_{num_workers}.pstats')
 
 
 if __name__ == '__main__':
-    test_pytorch_dataloader_single_target()
+    NUM_WORKERS = [0, 4, 8]
+    for num_workers in NUM_WORKERS:
+        test_pytorch_dataloader_single_target(num_workers)

@@ -6,7 +6,6 @@ from abc import ABC, abstractmethod
 from collections.abc import Callable
 
 import numpy as np
-from numba import njit
 
 MAX_DAYS_IN_WEEK = 7
 MAX_DAYS_IN_MONTH = 32

@@ -5,7 +5,7 @@ from typing import Union
 
 import hydra
 import rootutils
-from omegaconf import DictConfig, OmegaConf
+from omegaconf import DictConfig
 from tqdm import tqdm
 
 
@@ -42,7 +42,8 @@ def main(cfg: DictConfig):
             targets.append(target)
         return targets
 
-    cProfile.runctx('generate(apps, target_generator)', None, locals(), filename='base_target_generation.pstat')
+    cProfile.runctx('generate(apps, target_generator)', None, locals(),
+                    filename='profiler_results/base_target_generation.pstat')
 
 
 if __name__ == "__main__":

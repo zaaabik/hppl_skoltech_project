@@ -37,7 +37,7 @@ Furthermore, the framework now supports **generating 20 synthetic targets per tr
 
 
 
-Profiling function generate one target per transaction for one user (10x speedup):
+Profiling function generate one target per transaction for one user (5x speedup):
 
 **Base implementation:**
 
